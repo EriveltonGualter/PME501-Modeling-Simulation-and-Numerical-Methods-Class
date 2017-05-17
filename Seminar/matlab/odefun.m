@@ -8,7 +8,7 @@ function yd = odefun( t, y)
     s = y(1);
     v = y(2);
       
-    if t < 1.5
+    if t < 2
         status = 1;
     else
 %         if t > 15 && t < 20

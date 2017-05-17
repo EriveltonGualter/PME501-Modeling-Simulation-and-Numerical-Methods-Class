@@ -8,19 +8,27 @@ y0 = [x0, v0];
 
 % options = odeset('Events',@event);
 
-[T, Yout] = ode45('odefun',[0 30],y0);
+[T, Yout] = ode45('odefun',[0.4 30],y0);
 
-%%
+
 data.ti = T;
 data.phi = zeros(size(T));
 data.phid = zeros(size(T));
 data.theta = Yout(:,1)/0.3048;
 data.thetad = Yout(:,2);
 
+%%
 simulation(data);
 
 figure()
-% a = (w.F*(w.Rl/w.R) - w.Fr)/(w.M+w.Jr/w.R^2);
+%%
+for i=1:size(T,1)
+    if Yout(i,2) > 0
+        a(i) = (w.F*(w.Rl/w.R) - w.Fr)/(w.M+w.Jr/w.R^2);
+    else
+        a(i) = (w.F*(w.Rl/w.R))/(w.M+w.Jr/w.R^2);
+    end
+end
 
 %%
 hold on
@@ -33,7 +41,8 @@ legend('Experiment', 'Simulation');
 xlabel('tempo (s)');
 ylabel('velocidade (m/s)');
 
-pt(data);
+figure()
+pt1(data);
 grid
 
 

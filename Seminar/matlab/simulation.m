@@ -17,13 +17,12 @@ function [] = simulation(opt)
     f_wheel_size = 8*0.0254;
     
     % Fase 1
-    %phio = [-atan2(r_wheel_size-f_wheel_size*2, dist_rodas); pi/2];
+    phio = [-atan2(r_wheel_size-f_wheel_size*2, dist_rodas); pi/2];
     % Fase 2
-     phio = [atan2(dist_rodas, r_wheel_size-f_wheel_size*2); pi];
+%      phio = [atan2(dist_rodas, r_wheel_size-f_wheel_size*2); pi];
     
-    while time < 20
-
-        
+    first_frame = true;
+    while time < 10
         % Compute the position of the system at the current real world time
         posDraw = interp1(opt.ti',(opt.theta.*0.3048)',time')';
         phiDraw = interp1(opt.ti',(opt.phi)',time')';
@@ -33,6 +32,22 @@ function [] = simulation(opt)
 
         % Update current time
         time = toc;
+        
+        % gif utilities
+        set(gcf,'color','w'); % set figure background to white
+        frame = getframe(1);
+        im = frame2im(frame);
+        [imind,cm] = rgb2ind(im,256);
+        outfile = 'DijkstraGrid.gif';
+
+        % On the first loop, create the file. In subsequent loops, append.
+        if first_frame
+            imwrite(imind,cm,outfile,'gif','DelayTime',0,'loopcount',inf);
+            first_frame = false;
+        else
+            imwrite(imind,cm,outfile,'gif','DelayTime',0,'writemode','append');
+        end
+        
     end
 
 

@@ -7,7 +7,7 @@ y0 = [pi/2, 0, 0, 0];
 % options = odeset('Events',@event);
 
 options = odeset('AbsTol',1E-8,'RelTol',1E-8);
-[T, Yout] = ode45('odefun2',[0 3],y0, options);
+[T, Yout] = ode45('odefun2',[0 10],y0, options);
 
 data.ti = T;
 data.phi = Yout(:,1);
