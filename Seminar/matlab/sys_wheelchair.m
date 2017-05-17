@@ -11,7 +11,11 @@ function [ wheelchair ] = sys_wheelchair()
     wheelchair.l = 0.256;
     wheelchair.g = 9.81;
 
-    wheelchair.Fr = 30; 
-    wheelchair.F = 70;
-    
+    wheelchair.Fr = 0; 
+    wheelchair.F = 0;
+
+%     Fase 1
+%     wheelchair.Fr = 25; 
+%     wheelchair.F = 160;
+ 
 end

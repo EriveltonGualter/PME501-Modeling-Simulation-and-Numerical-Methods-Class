@@ -8,15 +8,15 @@ function yd = odefun( t, y)
     s = y(1);
     v = y(2);
       
-    if t < 5
+    if t < 1.5
         status = 1;
     else
-        if t > 15 && t < 20
-            status = 1;
-            w.F = 2*w.F;
-        else
+%         if t > 15 && t < 20
+%             status = 1;
+%             w.F = 2*w.F;
+%         else
             status = 0;
-        end
+%         end
     end
       
     if v > 0
@@ -26,7 +26,7 @@ function yd = odefun( t, y)
     end
     
     sd = v;
-    vd = (w.F*(w.Rl/w.R)*status - w.Fr*v)/(w.M+w.Jr/w.R^2);
+    vd = (w.F*(w.Rl/w.R)*status - w.Fr)/(w.M+w.Jr/w.R^2);
     % dv = (F*(Rl/R) - Fr*0.3)/(M+Jr/R^2);
     
     yd = [sd; vd];

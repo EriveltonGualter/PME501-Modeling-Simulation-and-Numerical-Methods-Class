@@ -20,21 +20,30 @@ f_wheel_size = 8*0.0254;
 pushrim_size = 20*0.0254;
 diff_wp = (r_wheel_size - pushrim_size)/2;
 
-vec_wheelx = 0.650;                                   % Vector between rear and front wheel
-vec_wheely = (f_wheel_size-r_wheel_size)/2;           % Vector between rear and front wheel
-vec_wheelx = vec_wheelx*cos(phio-phi) - vec_wheely*sin(phio-phi); % rotational of the vector
-vec_wheely = vec_wheelx*sin(phio-phi) + vec_wheely*cos(phio-phi); % rotational of the vector
+% vec_wheelx = 0.650;                                   % Vector between rear and front wheel
+% vec_wheely = (f_wheel_size-r_wheel_size)/2;           % Vector between rear and front wheel
+% vec_wheelx = vec_wheelx*cos(phio-phi) - vec_wheely*sin(phio-phi); % rotational of the vector
+% vec_wheely = vec_wheelx*sin(phio-phi) + vec_wheely*cos(phio-phi); % rotational of the vector
+% 
+% f_wheel_posx =  vec_wheelx + pos;
+% f_wheel_posy =  vec_wheely + r_wheel_size/2;
+% 
+% vec_chairx = 0;
+% vec_chairy = 0.59;
+% vec_chairx = vec_chairx*cos(phio-phi) - vec_chairy*sin(phio-phi); % rotational of the vector
+% vec_chairy = vec_chairx*sin(phio-phi) + vec_chairy*cos(phio-phi); % rotational of the vector
+% 
+% px = vec_chairx + pos;
+% py = vec_chairy + r_wheel_size/2;
 
-f_wheel_posx =  vec_wheelx + pos;
-f_wheel_posy =  vec_wheely + r_wheel_size/2;
+dist_rodas = 0.6;
+h_cadeira = 0.5;
 
-vec_chairx = 0;
-vec_chairy = 0.59;
-vec_chairx = vec_chairx*cos(phio-phi) - vec_chairy*sin(phio-phi); % rotational of the vector
-vec_chairy = vec_chairx*sin(phio-phi) + vec_chairy*cos(phio-phi); % rotational of the vector
+f_wheel_posx =  dist_rodas*cos(phio(1)-phi) + pos ;
+f_wheel_posy =  dist_rodas*sin(phio(1)-phi) + r_wheel_size/2;
 
-px = vec_chairx + pos;
-py = vec_chairy + r_wheel_size/2;
+px =  h_cadeira*cos(phio(2)-phi) + pos;
+py =  h_cadeira*sin(phio(2)-phi)+ r_wheel_size/2;
 
 % Title and simulation time:
 title(sprintf('Tempo de Simulação ... t = %2.2f%',time));

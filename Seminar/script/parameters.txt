@@ -1,0 +1,9 @@
+Propriedades, Valores
+Massa Total,87.7 kg
+Massa da Cadeira de Rodas,12.7 kg
+Massa da Roda Traseira,2.54 kg
+Momento Angular da Roda Traseira,0.14 kg.m^2
+Momento Angular da Cadeira de Rodas,1.67 kg.m^2
+Raio da Roda Traseira,0.305 m
+Distancia horizontal do CG,0.107 m
+Distancia vertical do CG,0.436 m

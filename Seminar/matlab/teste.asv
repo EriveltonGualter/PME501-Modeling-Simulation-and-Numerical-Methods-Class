@@ -1,0 +1,35 @@
+close all, clear all
+
+w = sys_wheelchair();
+
+y0 = [0, 0, 0, 0];
+
+% options = odeset('Events',@event);
+
+options = odeset('AbsTol',1E-8,'RelTol',1E-8);
+[T, Yout] = ode45('odefun2',[0 30],y0, options);
+
+
+figure(1)
+plot(T, Yout(:,1), 'LineWidth',2);
+    legend('');
+    xlabel('tempo (s)');
+    ylabel('Angulo CR');
+
+figure(2)
+plot(T, Yout(:,2), 'LineWidth',2);
+    legend('');
+    xlabel('tempo (s)');
+    ylabel('Velocidade Angular CR');
+
+figure(3)
+plot(T, Yout(:,3), 'LineWidth',2);
+    legend('');
+    xlabel('tempo (s)');
+    ylabel('Angulo CR');
+
+figure(4)
+plot(T, Yout(:,4), 'LineWidth',2);
+    legend('');
+    xlabel('tempo (s)');
+    ylabel('velocidade (m/s)');

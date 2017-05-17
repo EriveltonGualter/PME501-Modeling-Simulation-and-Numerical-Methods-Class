@@ -13,7 +13,7 @@ function yd = odefun( t, y)
       
     A = inv(M)*( [w.F-w.Fr  -w.F]' - K );
 
-    yd = [y(2) A(2,1) y(4) A(1,1)]
+    yd = [y(2); A(2,1); y(4); A(1,1)];
     
 end
 
