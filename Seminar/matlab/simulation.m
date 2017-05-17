@@ -21,33 +21,55 @@ function [] = simulation(opt)
     % Fase 2
      phio = [atan2(dist_rodas, r_wheel_size-f_wheel_size*2); pi];
     
-    while time < 20
+%     while time < 20
+% Set up GIF and log data
+        frameRate = 25;
+        fileName = 'cartPoleAnimation.gif';
+        nFrame = floor(frameRate*opt.ti(end));
+        frameDelay = 1/frameRate;
+        time = 0;
+        for i=1:nFrame
         % Compute the position of the system at the current real world time
         posDraw = interp1(opt.ti',(opt.theta.*0.3048)',time')';
         phiDraw = interp1(opt.ti',(opt.phi)',time')';
 
         % Redraw the image
         drawWheelchair(time, posDraw, phio, phiDraw, extents);
-
-        % Update current time
-        time = toc;
+        
+    % Write data
+    if i==1  %First frame (create GIF file)
+        imwrite(imData,map,fileName,'gif',...
+            'LoopCount',inf,...
+            'WriteMode','overwrite',...
+            'DelayTime',frameDelay);            
+    else   %Append data to file
+        imwrite(imData,map,fileName,'gif',...
+            'WriteMode','append',...
+            'DelayTime',frameDelay);         
     end
-
-
     
-%     for i = 1: size(opt.ti, 1)
-%         % Compute the position of the system at the current real world time
-%         posDraw = opt.theta(i).*0.3048;
-%         phiDraw = opt.phi(i);
-% 
-%         % Redraw the image
-%         %drawWheelchair(time, posDraw, opt.phi(1), phiDraw, extents);
-%         drawWheelchair(time, posDraw, phio, phiDraw, extents);
-% 
-%     end
-    
-    disp(sprintf('      Simulation Time    : %2.2f s \n      Travelled distance : %2.2f meters ',time, opt.theta(end)*0.3048))
-    
-    % t = %2.2f%',time));
+    % time step system to next frame:
+    time = time + frameDelay;
 end
+%         % Update current time
+%         time = toc;
+%     end
+% 
+% 
+%     
+% %     for i = 1: size(opt.ti, 1)
+% %         % Compute the position of the system at the current real world time
+% %         posDraw = opt.theta(i).*0.3048;
+% %         phiDraw = opt.phi(i);
+% % 
+% %         % Redraw the image
+% %         %drawWheelchair(time, posDraw, opt.phi(1), phiDraw, extents);
+% %         drawWheelchair(time, posDraw, phio, phiDraw, extents);
+% % 
+% %     end
+%     
+%     disp(sprintf('      Simulation Time    : %2.2f s \n      Travelled distance : %2.2f meters ',time, opt.theta(end)*0.3048))
+%     
+%     % t = %2.2f%',time));
+% end
 
